@@ -3,175 +3,325 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Sri Varsha Pasula | Cybersecurity Student</title>
-
+  <title>Sri Varsha Pasula</title>
   <style>
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a;
+      --beige: #e8e0d0;
+      --beige-dim: #a09888;
+      --beige-faint: #2a2520;
+      --accent: #c8b89a;
+    }
     body {
-      margin: 0;
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
+      background: var(--bg);
+      color: var(--beige);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.75;
+      min-height: 100vh;
     }
-
-    .container {
-      max-width: 950px;
-      margin: auto;
-      padding: 50px 20px;
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 36px 60px;
+      border-bottom: 1px solid var(--beige-faint);
     }
-
-    h1 {
-      color: #58a6ff;
-      font-size: 3.2rem;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      color: #58a6ff;
-      margin-top: 40px;
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-      color: #8b949e;
-    }
-
-    .card {
-      background: #161b22;
-      padding: 25px;
-      border-radius: 14px;
-      margin-top: 20px;
-    }
-
-    .tag {
-      display: inline-block;
-      background: #21262d;
-      padding: 8px 14px;
-      border-radius: 20px;
-      margin: 6px;
-      font-size: 0.95rem;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    a {
-      color: #58a6ff;
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--beige);
       text-decoration: none;
+      cursor: pointer;
     }
-
-    .links a {
-      display: inline-block;
-      margin-right: 20px;
-      margin-top: 10px;
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      color: var(--beige-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      cursor: pointer;
     }
-
+    .nav-links a:hover, .nav-links a.active { color: var(--beige); }
+    .page { display: none; }
+    .page.active { display: block; }
+    .container { max-width: 780px; margin: 0 auto; padding: 80px 60px; }
+    .home-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: calc(100vh - 97px);
+      padding: 0 60px 60px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .home-wrap h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+    .home-wrap h1 em { font-style: normal; color: var(--accent); }
+    .home-subtitle {
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--beige-dim);
+      margin-bottom: 48px;
+    }
+    .home-links { display: flex; gap: 32px; }
+    .home-links a {
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--beige-dim);
+      text-decoration: none;
+      border-bottom: 1px solid var(--beige-faint);
+      padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .home-links a:hover { color: var(--beige); border-color: var(--beige-dim); }
+    .page-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--beige-dim);
+      margin-bottom: 56px;
+    }
+    .about-text p {
+      font-size: 1.25rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--beige);
+      margin-bottom: 28px;
+      max-width: 640px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-meta {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      border-top: 1px solid var(--beige-faint);
+      padding-top: 40px;
+    }
+    .meta-item label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--beige-dim);
+      margin-bottom: 6px;
+    }
+    .meta-item span { font-size: 1rem; color: var(--beige); }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .skill-group { padding: 36px 0; border-bottom: 1px solid var(--beige-faint); }
+    .skill-group:nth-child(odd) { padding-right: 48px; border-right: 1px solid var(--beige-faint); }
+    .skill-group:nth-child(even) { padding-left: 48px; }
+    .skill-group h3 {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--beige-dim);
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+    .skill-list { list-style: none; }
+    .skill-list li { font-size: 1.05rem; color: var(--beige); padding: 4px 0; }
+    .project-item { padding: 48px 0; border-bottom: 1px solid var(--beige-faint); }
+    .project-item:first-child { padding-top: 0; }
+    .project-num {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--beige-dim);
+      margin-bottom: 16px;
+    }
+    .project-item h3 {
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--beige);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .project-item p { font-size: 1.05rem; color: var(--beige-dim); max-width: 560px; line-height: 1.75; }
+    .project-tags { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .project-tags span {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--beige-faint);
+      padding: 5px 14px;
+    }
+    .links-list { list-style: none; }
+    .links-list li { border-bottom: 1px solid var(--beige-faint); }
+    .links-list a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 0;
+      text-decoration: none;
+      color: var(--beige);
+      font-size: 1.2rem;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+    .links-list a:hover { color: var(--accent); }
+    .links-list a span {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--beige-dim);
+    }
+    @media (max-width: 600px) {
+      nav { padding: 24px; }
+      .nav-logo { display: none; }
+      .container { padding: 48px 24px; }
+      .home-wrap { padding: 0 24px 48px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-group:nth-child(odd) { padding-right: 0; border-right: none; }
+      .skill-group:nth-child(even) { padding-left: 0; }
+      .about-meta { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
-
 <body>
 
-  <div class="container">
+  <nav>
+    <span class="nav-logo" onclick="showPage('home')">SVP</span>
+    <ul class="nav-links">
+      <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+      <li><a onclick="showPage('skills')" id="nav-skills">Skills</a></li>
+      <li><a onclick="showPage('projects')" id="nav-projects">Projects</a></li>
+      <li><a onclick="showPage('links')" id="nav-links">Links</a></li>
+    </ul>
+  </nav>
 
-    <h1>Sri Varsha Pasula</h1>
-
-    <p class="subtitle">
-      Cybersecurity Student • Network Security • CTF Player • Security Operations
-    </p>
-
-    <div class="card"> 
-      
-      <h2>About Me</h2>
-
-      <p>
-        Motivated Cybersecurity student at GITAM University with hands-on
-        experience in network defense, digital forensics, penetration testing,
-        and security operations.
-      </p>
-
-      <p>
-        Passionate about solving real-world security problems through practical
-        learning, CTF competitions, and security-focused development projects.
-      </p>
-
-    </div>
-<div class="profile">
-  <img src="assets/profile.jpg" alt="Profile Picture" class="profile-pic">
-</div>
-
-<style>
-.profile-pic {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 2px solid #00ffcc;
-  object-fit: cover;
-}
-</style>
-    <div class="card">
-
-      <h2>Technical Skills</h2>
-
-      <span class="tag">Python</span>
-      <span class="tag">C</span>
-       <span class="tag">Java</span>
-      <span class="tag">Bash</span>
-      <span class="tag">PowerShell</span>
-      <span class="tag">Nmap</span>
-      <span class="tag">Wireshark</span>
-      <span class="tag">Metasploit</span>
-      <span class="tag">Kali Linux</span>
-      <span class="tag">OSINT</span>
-      <span class="tag">Networking</span>
-
-    </div>
-
-    <div class="card">
-
-      <h2>Projects</h2>
-
-      <h3>Image Steganography Tool</h3>
-
-      <p>
-        Developed a secure image steganography tool using AES-256 encryption
-        and LSB data-hiding techniques for concealed file storage within PNG images.
-      </p>
-
-      <h3>Python Network Port Scanner</h3>
-
-      <p>
-        Built a multi-threaded TCP port scanner with banner grabbing,
-        service detection, and JSON-based reporting.
-      </p>
-
-    </div>
-
-    <div class="card">
-
-      <h2>Links</h2>
-
-      <div class="links">
-
-        <a href="https://github.com/varshared">
-          GitHub
-        </a>
-
-        <a href="https://linkedin.com/in/srivarshapasula">
-          LinkedIn
-        </a>
-
-        <a href="mailto:vshapasula@gmail.com">
-          Email
-        </a>
-
+  <div class="page active" id="page-home">
+    <div class="home-wrap">
+      <img src="assets/Shaaa.jpeg" alt="Sri Varsha Pasula" style="width:110px; height:110px; border-radius:50%; object-fit:cover; margin-bottom:32px;">
+      <h1>Sri Varsha<br><em>Pasula</em></h1>
+      <p class="home-subtitle">Cybersecurity Student &nbsp;·&nbsp; GITAM University</p>
+      <div class="home-links">
+        <a onclick="showPage('about')">About</a>
+        <a onclick="showPage('projects')">Projects</a>
+        <a href="mailto:vshapasula@gmail.com">Contact</a>
       </div>
-
     </div>
-
   </div>
+
+  <div class="page" id="page-about">
+    <div class="container">
+      <p class="page-title">About</p>
+      <div class="about-text">
+        <p>Motivated Cybersecurity student at GITAM University with hands-on experience in network defense, digital forensics, penetration testing, and security operations.</p>
+        <p>Passionate about solving real-world security problems through practical learning, CTF competitions, and security-focused development projects.</p>
+      </div>
+      <div class="about-meta">
+        <div class="meta-item">
+          <label>University</label>
+          <span>GITAM University</span>
+        </div>
+        <div class="meta-item">
+          <label>Focus</label>
+          <span>Cybersecurity</span>
+        </div>
+        <div class="meta-item">
+          <label>Interests</label>
+          <span>CTF · Forensics · Pen Testing</span>
+        </div>
+        <div class="meta-item">
+          <label>Currently</label>
+          <span>Security Operations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-skills">
+    <div class="container">
+      <p class="page-title">Technical Skills</p>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <ul class="skill-list">
+            <li>Python</li><li>C</li><li>Java</li><li>Bash</li><li>PowerShell</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Tools</h3>
+          <ul class="skill-list">
+            <li>Nmap</li><li>Wireshark</li><li>Metasploit</li><li>Kali Linux</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Domains</h3>
+          <ul class="skill-list">
+            <li>Network Security</li><li>Digital Forensics</li><li>Penetration Testing</li><li>OSINT</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Platforms</h3>
+          <ul class="skill-list">
+            <li>Linux</li><li>Windows</li><li>CTF Environments</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-projects">
+    <div class="container">
+      <p class="page-title">Projects</p>
+      <div class="project-item">
+        <p class="project-num">01</p>
+        <h3>Image Steganography Tool</h3>
+        <p>Developed a secure image steganography tool using AES-256 encryption and LSB data-hiding techniques for concealed file storage within PNG images.</p>
+        <div class="project-tags">
+          <span>Python</span><span>AES-256</span><span>Steganography</span>
+        </div>
+      </div>
+      <div class="project-item">
+        <p class="project-num">02</p>
+        <h3>Python Network Port Scanner</h3>
+        <p>Built a multi-threaded TCP port scanner with banner grabbing, service detection, and JSON-based reporting.</p>
+        <div class="project-tags">
+          <span>Python</span><span>Networking</span><span>Multithreading</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-links">
+    <div class="container">
+      <p class="page-title">Links</p>
+      <ul class="links-list">
+        <li><a href="https://github.com/varshared" target="_blank">GitHub <span>↗</span></a></li>
+        <li><a href="https://linkedin.com/in/srivarshapasula" target="_blank">LinkedIn <span>↗</span></a></li>
+        <li><a href="mailto:vshapasula@gmail.com">vshapasula@gmail.com <span>Email</span></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      const navEl = document.getElementById('nav-' + id);
+      if (navEl) navEl.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+  </script>
 
 </body>
 </html>
